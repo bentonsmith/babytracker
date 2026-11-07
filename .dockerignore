@@ -1,0 +1,10 @@
+data
+data-test
+data-demo
+backups
+__pycache__
+*.pyc
+*.db
+*.log
+.git
+docs

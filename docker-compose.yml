@@ -1,0 +1,42 @@
+services:
+  babytracker:
+    build: .
+    container_name: babytracker
+    restart: unless-stopped
+    # The entrypoint chowns /data to these ids, then drops privileges, so the
+    # SQLite file stays owned by a normal user instead of root. Set these to
+    # your own `id -u`:`id -g` if you are not uid 1000.
+    environment:
+      - APP_UID=1000
+      - APP_GID=1000
+      - DB_PATH=/data/baby.db
+      # Web-push contact claim. Must be a URL you own (Apple rejects
+      # placeholders it can't resolve); replace before relying on dose
+      # reminders. Android/desktop work either way.
+      - VAPID_SUB=https://example.com
+    # SECURITY BOUNDARY: loopback-only bind. The app has NO authentication, so
+    # reach it through a private network (Tailscale/WireGuard/SSH tunnel) or an
+    # authenticating proxy. NEVER widen this to 0.0.0.0.
+    ports:
+      - "127.0.0.1:3001:8000"
+    volumes:
+      - ./data:/data
+
+  # Staging copy — ALL testing happens here, never against `babytracker`.
+  # Start:  docker compose --profile test up -d babytracker-test
+  # Data:   ./data-test (snapshot of prod; refresh before data-dependent tests)
+  # Note:   compose builds a separate image per service, so a change needs
+  #         `docker compose build babytracker babytracker-test`.
+  babytracker-test:
+    build: .
+    container_name: babytracker-test
+    profiles: ["test"]
+    restart: "no"
+    environment:
+      - APP_UID=1000
+      - APP_GID=1000
+      - DB_PATH=/data/baby.db
+    ports:
+      - "127.0.0.1:3013:8000"
+    volumes:
+      - ./data-test:/data

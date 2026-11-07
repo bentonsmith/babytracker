@@ -1,0 +1,26 @@
+# Live database + WAL — runtime state, not code
+/data/
+
+# Daily DB backup copies — runtime state
+/backups/
+
+# Staging snapshot (copy of live data — must never be committed)
+/data-test/
+/data-demo/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# VAPID private key (written next to the DB by the push setup)
+*.pem
+
+# Local venv
+.venv/
+
+# Host-specific runbook (hostnames, paths, cron IDs) — never publish
+DEPLOYMENT.local.md
+
+# Local env / logs
+.env
+*.log
