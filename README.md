@@ -8,6 +8,11 @@ home screen, and never sends your baby's data anywhere.
 Built for a household of tired people at 3am: two big tap targets, no accounts,
 no sync, no subscription.
 
+**Status:** early, and used daily by exactly one household. Expect breaking
+changes to the API and schema without a deprecation cycle — fork it if you need
+something stable. It is also the app whose data matters to us, so schema changes
+come with an in-place migration of the existing database.
+
 ![Main screen](docs/screenshot-main.png)
 
 ## Why another baby tracker
