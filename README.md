@@ -90,7 +90,7 @@ The same caution applies to the JSON API: it is unauthenticated by design.
 | --- | --- | --- |
 | `DB_PATH` | `/data/baby.db` (container) | SQLite file location |
 | `APP_UID` / `APP_GID` | `1000` / `1000` | owner the entrypoint gives the data dir, and the uid the app then runs as |
-| `VAPID_SUB` | `https://example.com` | contact claim for Web Push — set it to a URL or `mailto:` you own |
+| `VAPID_SUB` | `https://example.com` | contact claim for Web Push — set it to a URL or `mailto:` you own, via `.env` |
 | `BACKUP_VERBOSE` | unset | `1` prints a line per successful backup |
 
 Port: container listens on `8000`; `docker-compose.yml` publishes it on

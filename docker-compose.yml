@@ -12,8 +12,9 @@ services:
       - DB_PATH=/data/baby.db
       # Web-push contact claim. Must be a URL you own (Apple rejects
       # placeholders it can't resolve); replace before relying on dose
-      # reminders. Android/desktop work either way.
-      - VAPID_SUB=https://example.com
+      # reminders. Android/desktop work either way. Put your real value in
+      # .env (gitignored) rather than editing this line.
+      - VAPID_SUB=${VAPID_SUB:-https://example.com}
     # SECURITY BOUNDARY: loopback-only bind. The app has NO authentication, so
     # reach it through a private network (Tailscale/WireGuard/SSH tunnel) or an
     # authenticating proxy. NEVER widen this to 0.0.0.0.
